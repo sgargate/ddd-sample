@@ -3,16 +3,13 @@ package com.ddd_bootcamp.application
 import com.ddd_bootcamp.domain.Cart
 import com.ddd_bootcamp.domain.Product
 
-object Application {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        val cart = Cart()
-        val product = Product("Apple Pencil")
-        cart.add(product)
-        println("Cart = $cart")
-        val products = cart.getProducts()
-        println("----------------------------------------")
-        println("products = $products")
-        println("----------------------------------------")
-    }
+fun main() {
+    val cart = Cart()
+    val product = Product("Apple Pencil")
+    cart.add(product)
+    println("Cart = $cart")
+    val products = cart.products
+    println("----------------------------------------")
+    println("products = $products")
+    println("----------------------------------------")
 }
