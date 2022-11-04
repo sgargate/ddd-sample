@@ -1,23 +1,18 @@
-package com.ddd_bootcamp.domain;
+package com.ddd_bootcamp.domain
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Cart {
-    private List<Product> products = new ArrayList<>();
-
-    public void add(Product product) {
-        products.add(product);
+class Cart {
+    private val products: MutableList<Product> = ArrayList()
+    fun add(product: Product) {
+        products.add(product)
     }
 
-    public List<Product> getProducts() {
-        return products;
+    fun getProducts(): List<Product> {
+        return products
     }
 
-    @Override
-    public String toString() {
+    override fun toString(): String {
         return "Cart{" +
                 "products=" + products +
-                '}';
+                '}'
     }
 }

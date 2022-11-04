@@ -1,22 +1,18 @@
-package com.ddd_bootcamp.application;
+package com.ddd_bootcamp.application
 
-import com.ddd_bootcamp.domain.Cart;
-import com.ddd_bootcamp.domain.Product;
+import com.ddd_bootcamp.domain.Cart
+import com.ddd_bootcamp.domain.Product
 
-import java.util.List;
-
-public class Application {
-    public static void main(String[] args) {
-        Cart cart = new Cart();
-        Product product = new Product("Apple Pencil");
-        cart.add(product);
-
-        System.out.println("Cart = " + cart);
-        List<Product> products = cart.getProducts();
-
-        System.out.println("----------------------------------------");
-        System.out.println("products = " + products);
-        System.out.println("----------------------------------------");
-
+object Application {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        val cart = Cart()
+        val product = Product("Apple Pencil")
+        cart.add(product)
+        println("Cart = $cart")
+        val products = cart.getProducts()
+        println("----------------------------------------")
+        println("products = $products")
+        println("----------------------------------------")
     }
 }

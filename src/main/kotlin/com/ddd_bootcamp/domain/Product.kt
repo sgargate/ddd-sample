@@ -1,20 +1,10 @@
-package com.ddd_bootcamp.domain;
+package com.ddd_bootcamp.domain
 
-public class Product {
-    private String name;
+class Product(val name: String) {
 
-    public Product(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
+    override fun toString(): String {
         return "Product{" +
                 "name='" + name + '\'' +
-                '}';
+                '}'
     }
 }
