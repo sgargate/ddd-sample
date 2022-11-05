@@ -1,5 +1,9 @@
-package com.ddd_bootcamp.domain
+package com.ddd_bootcamp.domain.service
 
+import com.ddd_bootcamp.domain.Price
+import com.ddd_bootcamp.domain.ProductName
+
+// DDD - doamin service
 class CompetitorPricing(
     private val productPrices: Map<ProductName, Price> = mapOf(),
     private val discount: Long = 10

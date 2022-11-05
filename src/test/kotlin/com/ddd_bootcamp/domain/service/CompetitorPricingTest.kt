@@ -1,5 +1,7 @@
-package com.ddd_bootcamp.domain
+package com.ddd_bootcamp.domain.service
 
+import com.ddd_bootcamp.domain.Price
+import com.ddd_bootcamp.domain.ProductName
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
