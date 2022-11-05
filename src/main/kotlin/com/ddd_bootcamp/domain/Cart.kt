@@ -5,10 +5,10 @@ import com.ddd_bootcamp.domain.events.ItemAddedEvent
 import com.ddd_bootcamp.domain.events.ItemRemovedEvent
 import kotlin.collections.ArrayList
 
-data class Cart(
-    private val events: MutableList<Event> = ArrayList(),
+class Cart(
+    private val id: CartId = CartId.generate(),
     private val items: MutableList<CartItem> = ArrayList(),
-    private val id: CartId = CartId.generate()
+    private val events: MutableList<Event> = ArrayList(),
 ) {
     fun add(product: Product) {
         add(product, 1)
@@ -43,6 +43,14 @@ data class Cart(
             events.add(event)
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        return if (this === other) true
+        else if (other !is Cart) false
+        else id == other.id
+    }
+
+    override fun hashCode() = id.hashCode()
 }
 
 data class CartItem(val product: Product, val quantity: Int)

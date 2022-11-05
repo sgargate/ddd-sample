@@ -7,8 +7,8 @@ import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
 internal class CartTest {
-    val applePencil = Product("Apple Pencil")
-    val headphone = Product("Sony wireless headphone")
+    private val applePencil = Product("Apple Pencil")
+    private val headphone = Product("Sony wireless headphone")
 
     @Test
     fun shouldAddProductToCart() {
