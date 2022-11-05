@@ -9,7 +9,7 @@ class Cart(
     private val id: CartId = CartId.generate(),
     private val items: MutableList<CartItem> = ArrayList(),
     private val events: MutableList<Event> = ArrayList(),
-) {
+): Entity<Cart> {
     fun add(product: Product) {
         add(product, 1)
     }
@@ -43,6 +43,8 @@ class Cart(
             events.add(event)
         }
     }
+
+    override fun hasSameIdentityAs(other: Cart) = equals(other)
 
     override fun equals(other: Any?): Boolean {
         return if (this === other) true
