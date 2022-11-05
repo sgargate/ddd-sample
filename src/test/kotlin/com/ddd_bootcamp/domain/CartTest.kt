@@ -3,6 +3,7 @@ package com.ddd_bootcamp.domain
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import kotlin.test.assertContains
+import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
 internal class CartTest {
@@ -44,5 +45,15 @@ internal class CartTest {
         cart.add(applePencil, 2)
         cart.removeItem(applePencil)
         assertContains(cart.getRemovedProducts(), applePencil)
+    }
+
+    @Test
+    fun `should be able to differentiate carts`(){
+        val cart1 = Cart()
+        val cart2 = Cart()
+
+        cart1.add(headphone)
+        cart2.add(headphone)
+        assertNotEquals(cart1, cart2)
     }
 }

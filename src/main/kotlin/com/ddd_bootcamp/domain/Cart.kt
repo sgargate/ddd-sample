@@ -1,10 +1,14 @@
 package com.ddd_bootcamp.domain
 
+import com.ddd_bootcamp.domain.events.Event
+import com.ddd_bootcamp.domain.events.ItemAddedEvent
+import com.ddd_bootcamp.domain.events.ItemRemovedEvent
 import kotlin.collections.ArrayList
 
 data class Cart(
     private val events: MutableList<Event> = ArrayList(),
     private val items: MutableList<CartItem> = ArrayList(),
+    private val id: CartId = CartId.generate()
 ) {
     fun add(product: Product) {
         add(product, 1)
@@ -25,7 +29,8 @@ data class Cart(
 
     }
 
-    fun getRemovedProducts(): List<Product> = events.filterIsInstance<ItemRemovedEvent>().map { it.product }
+    fun getRemovedProducts(): Set<Product> = events.filterIsInstance<ItemRemovedEvent>()
+        .map { it.product }.toSet()
 
     private fun apply(event: ItemAddedEvent) {
         events.add(event)
@@ -42,6 +47,11 @@ data class Cart(
 
 data class CartItem(val product: Product, val quantity: Int)
 
-sealed class Event
-data class ItemAddedEvent(val item: CartItem) : Event()
-data class ItemRemovedEvent(val product: Product) : Event()
+data class CartId (val id: Int) {
+    companion object {
+        var id: Int = 0
+        fun generate(): CartId {
+            return CartId(id++)
+        }
+    }
+}
