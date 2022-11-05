@@ -8,8 +8,4 @@ fun main() {
     val product = Product("Apple Pencil")
     cart.add(product)
     println("Cart = $cart")
-    val products = cart.products
-    println("----------------------------------------")
-    println("products = $products")
-    println("----------------------------------------")
 }
