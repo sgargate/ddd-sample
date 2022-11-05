@@ -6,3 +6,5 @@ import com.ddd_bootcamp.domain.Product
 sealed class Event
 data class ItemAddedEvent(val item: CartItem) : Event()
 data class ItemRemovedEvent(val product: Product) : Event()
+
+data class CardCheckedOut(val items: List<CartItem>): Event()

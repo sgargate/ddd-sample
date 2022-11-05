@@ -1,17 +1,25 @@
 package com.ddd_bootcamp.domain
 
+import com.ddd_bootcamp.domain.events.CardCheckedOut
 import com.ddd_bootcamp.domain.events.Event
 import com.ddd_bootcamp.domain.events.ItemAddedEvent
 import com.ddd_bootcamp.domain.events.ItemRemovedEvent
-import kotlin.collections.ArrayList
 
 class Cart(
     private val id: CartId = CartId.generate(),
-    private val items: MutableList<CartItem> = ArrayList(),
+    val items: MutableList<CartItem> = ArrayList(),
     private val events: MutableList<Event> = ArrayList(),
 ): Entity<Cart> {
     fun add(product: Product) {
         add(product, 1)
+    }
+
+    fun checkout() {
+        apply(CardCheckedOut(this.items))
+    }
+
+    private fun apply(cardCheckedOut: CardCheckedOut) {
+        events.add(cardCheckedOut)
     }
 
     fun add(product: Product, quantity: Int) {
@@ -65,3 +73,5 @@ data class CartId (val id: Int) {
         }
     }
 }
+
+data class Order(val products: List<Product>)
