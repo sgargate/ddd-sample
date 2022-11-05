@@ -1,17 +1,17 @@
 package com.ddd_bootcamp.domain
 
-import java.util.ArrayList
+import kotlin.collections.ArrayList
 
 data class Cart(
+    private val events: MutableList<Event> = ArrayList(),
     private val items: MutableList<CartItem> = ArrayList(),
-    private val removedProducts: MutableList<Product> = ArrayList(),
 ) {
     fun add(product: Product) {
         add(product, 1)
     }
 
     fun add(product: Product, quantity: Int) {
-        items.add(CartItem(product, quantity))
+        apply(ItemAddedEvent(CartItem(product, quantity)))
     }
 
     fun size() = items.sumOf { it.quantity }
@@ -21,12 +21,27 @@ data class Cart(
     fun productQuantity(product: Product) = items.find { it.product == product }?.quantity ?: 0
 
     fun removeItem(product: Product) {
-        val removed = items.removeIf { it.product == product }
-        if(removed) {
-            removedProducts.add(product)
+        apply(ItemRemovedEvent(product))
+
+    }
+
+    fun getRemovedProducts(): List<Product> = events.filterIsInstance<ItemRemovedEvent>().map { it.product }
+
+    private fun apply(event: ItemAddedEvent) {
+        events.add(event)
+        items.add(event.item)
+    }
+
+    private fun apply(event: ItemRemovedEvent) {
+        val removed = items.removeIf { it.product == event.product }
+        if (removed) {
+            events.add(event)
         }
     }
-    fun getRemovedProducts(): List<Product> = removedProducts
 }
 
 data class CartItem(val product: Product, val quantity: Int)
+
+sealed class Event
+data class ItemAddedEvent(val item: CartItem) : Event()
+data class ItemRemovedEvent(val product: Product) : Event()
